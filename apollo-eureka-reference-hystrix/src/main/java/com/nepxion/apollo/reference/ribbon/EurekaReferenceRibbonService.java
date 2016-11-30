@@ -11,6 +11,7 @@ package com.nepxion.apollo.reference.ribbon;
  */
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,10 +21,13 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 public class EurekaReferenceRibbonService {
     @Autowired
     private RestTemplate restTemplate;
+    
+    @Value("${service.cluster.name}")
+    private String serviceClusterName;
 
     @HystrixCommand(fallbackMethod = "getUserFallback")
     public String getUser() {
-        return restTemplate.getForEntity("http://APOLLO-SERVICE/getUser?name=Zhangsan", String.class).getBody();
+        return restTemplate.getForEntity("http://" + serviceClusterName + "/getUser?name=Zhangsan", String.class).getBody();
     }
 
     public String getUserFallback() {
@@ -32,7 +36,7 @@ public class EurekaReferenceRibbonService {
 
     @HystrixCommand(fallbackMethod = "addFallback")
     public String add() {
-        return restTemplate.getForEntity("http://APOLLO-SERVICE/add?a=10&b=20", String.class).getBody();
+        return restTemplate.getForEntity("http://" + serviceClusterName + "/add?a=10&b=20", String.class).getBody();
     }
 
     public Integer addFallback() {

@@ -20,12 +20,12 @@ public class EurekaReferenceRibbonController {
     @Autowired
     private EurekaReferenceRibbonService ribbonService;
 
-//    // http://localhost:3333/getUser1
-//    @RequestMapping(value = "/getUser1", method = RequestMethod.GET)
-//    public String getUser() {
-//        return ribbonService.getUser();
-//    }
-    
+    // http://localhost:3333/getUser1
+    @RequestMapping(value = "/getUser1", method = RequestMethod.GET)
+    public String getUser() {
+        return ribbonService.getUser();
+    }
+
     // http://localhost:3333/add1
     @RequestMapping(value = "/add1", method = RequestMethod.GET)
     public String add() {
