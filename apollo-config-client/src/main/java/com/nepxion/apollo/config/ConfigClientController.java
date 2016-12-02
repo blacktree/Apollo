@@ -21,7 +21,7 @@ public class ConfigClientController {
     @Value("${my-config.appName}")
     private String appName;
 
-    // http://localhost:5556/my-config/appName
+    // http://localhost:5557/my-config/appName
     @RequestMapping("/my-config/appName")
     public String appName() {
         return appName;
