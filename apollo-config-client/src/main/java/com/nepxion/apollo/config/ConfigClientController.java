@@ -22,7 +22,7 @@ public class ConfigClientController {
     private String appName;
 
     // http://localhost:5557/my-config/appName
-    @RequestMapping("/my-config/appName")
+    @RequestMapping("/appName")
     public String appName() {
         return appName;
     }
