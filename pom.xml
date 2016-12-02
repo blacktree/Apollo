@@ -12,6 +12,7 @@
     <modules>
         <module>apollo-common-data</module>
         <module>apollo-config-server</module>
+        <module>apollo-config-client</module>
         <module>apollo-eureka-cluster</module>
         <module>apollo-eureka-reference</module>
         <module>apollo-eureka-reference-hystrix</module>
@@ -55,6 +56,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>apollo-config-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>apollo-config-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
