@@ -10,6 +10,8 @@
     <url>https://github.com/Nepxion/</url>
 
     <modules>
+        <module>apollo-bus-kafka</module>
+        <module>apollo-bus-rabbitmq</module>	
         <module>apollo-common-data</module>
         <module>apollo-config-server</module>
         <module>apollo-config-client</module>
@@ -19,6 +21,7 @@
         <module>apollo-eureka-service</module>
         <module>apollo-zookeeper-reference</module>
         <module>apollo-zookeeper-service</module>
+		<module>apollo-gateway-zuul</module>
     </modules>
 
     <properties>
@@ -47,6 +50,18 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>apollo-bus-kafka</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>apollo-bus-rabbitmq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>apollo-common-data</artifactId>
@@ -98,6 +113,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>apollo-zookeeper-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>apollo-gateway-zuul</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
