@@ -12,6 +12,8 @@ package com.nepxion.apollo.reference;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableDiscoveryClient
 @RestController
 public class ZookeeperReference {
+    private static final Logger LOG = LoggerFactory.getLogger(ZookeeperReference.class);
+    
     @Autowired
     private LoadBalancerClient loadBalancer;
 
@@ -37,7 +41,7 @@ public class ZookeeperReference {
     public Object discovery() {
         ServiceInstance serviceInstance = loadBalancer.choose("apollo-service");
 
-        System.out.println("serviceInstance=" + serviceInstance);
+        LOG.info("serviceInstance={}", serviceInstance);
 
         return "Zookeeper ::: Spring Cloud Load Balance=" + serviceInstance.getHost() + ":" + serviceInstance.getPort();
     }
@@ -47,7 +51,7 @@ public class ZookeeperReference {
     public Object all() {
         List<String> list = discovery.getServices();
 
-        System.out.println("list=" + list);
+        LOG.info("list={}", list);
 
         return "Zookeeper ::: Spring Cloud Discovery List Size=" + list.size();
     }

@@ -48,7 +48,7 @@ public class EurekaServiceController {
 
         Integer result = a + b;
 
-        LOG.info("/add, host:{}, service id:{}, result:{}", host, serviceId, result);
+        LOG.info("/add, host={}, service id={}, result={}", host, serviceId, result);
 
         return result;
     }
