@@ -26,4 +26,7 @@ public class ZuulGateway {
     public static void main(String[] args) {
         new SpringApplicationBuilder(ZuulGateway.class).web(true).run(args);
     }
+
+    // http://localhost:7777/apollo-service/add?a=1&b=2&accessToken=token
+    // http://localhost:7777/apollo-service/getUser?name=Zhangsan&accessToken=token
 }

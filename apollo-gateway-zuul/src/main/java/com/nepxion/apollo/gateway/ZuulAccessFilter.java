@@ -12,6 +12,7 @@ package com.nepxion.apollo.gateway;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,14 +45,15 @@ public class ZuulAccessFilter extends ZuulFilter {
         LOG.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
         Object accessToken = request.getParameter("accessToken");
-        if (accessToken == null) {
-            LOG.warn("Access token is empty");
+        if (accessToken == null || !StringUtils.equals(accessToken.toString(), "token")) {
+            LOG.warn("Access token is empty or invalid");
 
             context.setSendZuulResponse(false);
             context.setResponseStatusCode(401);
 
             return null;
         }
+        
         LOG.info("Access token is ok");
 
         return null;
