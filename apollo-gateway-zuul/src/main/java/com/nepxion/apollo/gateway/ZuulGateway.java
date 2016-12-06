@@ -18,6 +18,22 @@ import org.springframework.context.annotation.Bean;
 @SpringCloudApplication
 @EnableZuulProxy
 public class ZuulGateway {
+    /** Refer to followings: 
+    EnableZuulProxy->ZuulProxyConfiguration->ZuulConfiguration->ZuulFilterConfiguration->Map<String, ZuulFilter> filters
+    with key to value for "accessFilter":ZuulAccessFilter instance
+    @Configuration
+    protected static class ZuulFilterConfiguration {
+
+        @Autowired
+        private Map<String, ZuulFilter> filters;
+
+        @Bean
+        public ZuulFilterInitializer zuulFilterInitializer() {
+            return new ZuulFilterInitializer(this.filters);
+        }
+
+    }*/
+
     @Bean
     public ZuulAccessFilter accessFilter() {
         return new ZuulAccessFilter();
