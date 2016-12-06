@@ -22,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 public class EurekaReference1 {
     @Bean
     @LoadBalanced
-    RestTemplate restTemplate() {
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
