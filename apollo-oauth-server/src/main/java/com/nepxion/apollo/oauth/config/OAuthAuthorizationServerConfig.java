@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,14 +24,20 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+/**
+ * 配置client信息，以及源码中自带路径（如/oauth/check_token，默认是关闭的）的设置
+ */
 @Configuration
 public class OAuthAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+    private static final Logger LOG = LoggerFactory.getLogger(OAuthAuthorizationServerConfig.class);
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -70,11 +78,16 @@ public class OAuthAuthorizationServerConfig extends AuthorizationServerConfigure
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(clientDetails());
+        ClientDetailsService clientDetailsService = clientDetails();
+        ClientDetails clientDetails = clientDetailsService.loadClientByClientId("dms");
+        
+        LOG.info("Client secret={}", clientDetails.getClientSecret());
+        
+        clients.withClientDetails(clientDetailsService);
 
         /*clients.inMemory() // 使用in-memory存储
-                .withClient("client") // client_id
-                .secret("secret") // client_secret
+                .withClient("dms") // client_id
+                .secret("dms") // client_secret
                 .authorizedGrantTypes("authorization_code") // 该client允许的授权类型
                 .scopes("app"); // 允许的授权范围*/
     }

@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+/**
+ * 自定义的认证错误页
+ */
 @Controller
 @SessionAttributes("authorizationRequest")
 public class OAuthErrorController {

@@ -24,6 +24,15 @@ CHARSET = utf8
 COLLATE = utf8_general_ci;
 
 -- ----------------------------
+--  Records of `oauth_client_details`
+-- ----------------------------
+BEGIN;
+INSERT INTO `oauth_client_details` VALUES ('permission', 'oauth-resource', 'permission', 'app', 'authorization_code', 'http://www.baidu.com', NULL, NULL, NULL, NULL, NULL), 
+                                          ('dms',        'oauth-resource', 'dms',        'app', 'authorization_code', 'http://www.baidu.com', NULL, NULL, NULL, NULL, NULL), 
+                                          ('uniconsole', 'oauth-resource', 'uniconsole', 'app', 'authorization_code', 'http://www.baidu.com', NULL, NULL, NULL, NULL, NULL);
+COMMIT;
+
+-- ----------------------------
 --  Table structure for `oauth_client_token`
 -- ----------------------------
 DROP TABLE IF EXISTS `oauth_client_token`;
@@ -127,8 +136,42 @@ CHARSET = utf8
 COLLATE = utf8_general_ci;
 
 -- ----------------------------
---  Records of `oauth_client_details`
+--  Table structure for `authorities`
+-- ----------------------------
+DROP TABLE IF EXISTS `authorities`;
+CREATE TABLE `authorities`
+(
+  `username` varchar(256) NULL DEFAULT NULL,
+  `authority` varchar(256) NULL DEFAULT NULL
+)
+ENGINE = innodb
+CHARSET = utf8
+COLLATE = utf8_general_ci;
+
+-- ----------------------------
+--  Records of `authorities`
 -- ----------------------------
 BEGIN;
-INSERT INTO `oauth_client_details` VALUES ('client', NULL, 'secret', 'app', 'authorization_code', 'http://www.baidu.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `authorities` VALUES ('reader', 'ROLE_USER'), ('writer', 'ROLE_USER');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `users`
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` 
+(
+  `username` varchar(256) NULL DEFAULT NULL,
+  `password` varchar(256) NULL DEFAULT NULL,
+  `enabled` char(50) NULL DEFAULT NULL
+)
+ENGINE = innodb
+CHARSET = utf8
+COLLATE = utf8_general_ci;
+
+-- ----------------------------
+--  Records of `users`
+-- ----------------------------
+BEGIN;
+INSERT INTO `users` VALUES ('zhangsan', 'zhangsan', 'Y'), ('lisi', 'lisi', 'Y');
 COMMIT;
