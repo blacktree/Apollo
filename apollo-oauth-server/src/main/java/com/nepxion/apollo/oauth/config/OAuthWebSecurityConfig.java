@@ -34,6 +34,27 @@ public class OAuthWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
+
+        /*http.authorizeRequests()
+                .antMatchers("/login.html", "/login/failure").permitAll()
+                .anyRequest().hasRole("USER")
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/login?authorization_error=true")
+                .and()
+                .csrf()
+                .disable()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login.jsp")
+                .and()
+                .formLogin()
+                .loginPage("/login.html")//登陆页面  
+                .loginProcessingUrl("/login")//登陆处理路径  
+                .usernameParameter("username")//登陆用户名参数  
+                .passwordParameter("password")//登陆密码参数  
+                .defaultSuccessUrl("/login/success")//登陆成功路径  
+                .failureUrl("/login/failure");//登陆失败路径*/
     }
 
     @Override
