@@ -1,4 +1,4 @@
-package com.nepxion.apollo.oauth.provider;
+package com.nepxion.apollo.oauth.authentication;
 
 /**
  * <p>Title: Nepxion Apollo</p>
@@ -12,7 +12,6 @@ package com.nepxion.apollo.oauth.provider;
 
 import java.util.Collections;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -33,10 +32,9 @@ public class OAuthAuthenticationProvider implements AuthenticationProvider {
 
         LOG.info("Principal={}, Credentials={}", principal, credentials);
 
-        // 伪代码，用户名和密码必须为admin/123，未来跟用户权限系统做接口
-        if (!StringUtils.equals(principal.toString(), "admin") || !StringUtils.equals(credentials.toString(), "123")) {
+        /*if (!StringUtils.equals(principal.toString(), "admin") || !StringUtils.equals(credentials.toString(), "123")) {
             return null;
-        }
+        }*/
 
         // 返回一个Token对象表示登陆成功
         return new UsernamePasswordAuthenticationToken(principal, credentials, Collections.<GrantedAuthority> emptyList());
