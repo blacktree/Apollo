@@ -79,15 +79,15 @@ public class OAuthAuthorizationServerConfig extends AuthorizationServerConfigure
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         ClientDetailsService clientDetailsService = clientDetails();
-        ClientDetails clientDetails = clientDetailsService.loadClientByClientId("dms");
+        ClientDetails clientDetails = clientDetailsService.loadClientByClientId("archetype");
         
         LOG.info("Client secret={}", clientDetails.getClientSecret());
         
         clients.withClientDetails(clientDetailsService);
 
         /*clients.inMemory() // 使用in-memory存储
-                .withClient("dms") // client_id
-                .secret("dms") // client_secret
+                .withClient("archetype") // client_id
+                .secret("archetype") // client_secret
                 .authorizedGrantTypes("authorization_code") // 该client允许的授权类型
                 .scopes("app"); // 允许的授权范围*/
     }
