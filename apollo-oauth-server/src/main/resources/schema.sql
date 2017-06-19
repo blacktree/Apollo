@@ -29,6 +29,7 @@ COLLATE = utf8_general_ci;
 BEGIN;
 INSERT INTO `oauth_client_details` VALUES ('permission', 'oauth-resource', 'permission', 'app', 'authorization_code', 'http://www.baidu.com', NULL, NULL, NULL, NULL, NULL), 
                                           ('dms',        'oauth-resource', 'dms',        'app', 'authorization_code', 'http://www.baidu.com', NULL, NULL, NULL, NULL, NULL), 
+                                          ('archetype',  'oauth-resource', 'archetype',  'app', 'authorization_code', 'http://116.62.180.243:32222/#/framework', NULL, NULL, NULL, NULL, NULL), 
                                           ('uniconsole', 'oauth-resource', 'uniconsole', 'app', 'authorization_code', 'http://www.baidu.com', NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
