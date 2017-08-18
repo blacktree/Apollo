@@ -16,7 +16,7 @@ import java.util.List;
 import com.nepxion.apollo.state.machine.enums.Actions;
 import com.nepxion.apollo.state.machine.enums.States;
 
-public class ActionFactory {
+public class StateFactory {
     public static List<Actions> getActions(States states) {
         switch (states) {
             case STATE_WAIT_AUDIT:

@@ -14,17 +14,18 @@ import java.util.EnumSet;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.statemachine.StateContext;
+import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
-import org.springframework.statemachine.listener.StateMachineListener;
-import org.springframework.statemachine.listener.StateMachineListenerAdapter;
-import org.springframework.statemachine.transition.Transition;
 
+import com.nepxion.apollo.state.machine.entity.Entity;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
+import com.nepxion.apollo.state.machine.message.MachineMessage;
 
 @Configuration
 @EnableStateMachine
@@ -34,6 +35,10 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
         states
                 .withStates()
                 .initial(States.STATE_WAIT_AUDIT)
+                .state(States.STATE_AUDIT_REJECT, action())
+                .state(States.STATE_WAIT_SEND, action())
+                .state(States.STATE_SEND_COMPLETE, action())
+                .state(States.STATE_DELETE_COMPLETE, action())
                 .states(EnumSet.allOf(States.class));
     }
 
@@ -70,22 +75,27 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
             throws Exception {
         config
                 .withConfiguration()
-                .listener(listener());
+                .autoStartup(true);
     }
 
     @Bean
-    public StateMachineListener<States, Events> listener() {
-        return new StateMachineListenerAdapter<States, Events>() {
+    public Action<States, Events> action() {
+        return new Action<States, Events>() {
             @Override
-            public void transition(Transition<States, Events> transition) {
-                if (transition.getTarget() != null) {
-                    System.out.println("Target state : " + transition.getTarget().getId());
-                    System.out.println("Next Actions : " + ActionFactory.getActions(transition.getTarget().getId()));
-                }
+            public void execute(StateContext<States, Events> context) {
+                MachineMessage<Events> message = (MachineMessage<Events>) context.getMessage();
+                Events event = message.getPayload();
+                Entity entity = message.getEntity();
 
-                if (transition.getSource() != null) {
-                    // System.out.println("Source state : " + transition.getSource().getId());
-                }
+                States sourceState = context.getSource().getId();
+                States targetState = context.getTarget().getId();
+
+                entity.setSourceState(sourceState);
+                entity.setTargetState(targetState);
+                entity.setEvent(event);
+                entity.setTargetActions(StateFactory.getActions(targetState));
+
+                System.out.println("entity : " + entity);
             }
         };
     }

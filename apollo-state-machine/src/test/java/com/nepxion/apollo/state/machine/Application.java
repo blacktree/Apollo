@@ -16,8 +16,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.statemachine.StateMachine;
 
+import com.nepxion.apollo.state.machine.entity.Entity;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
+import com.nepxion.apollo.state.machine.message.MachineMessage;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -26,15 +28,28 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        stateMachine.start();
+        test1();
+        test2();
+    }
+    
+    private void test1() throws Exception {
+        Entity entity = new Entity();
 
-        stateMachine.sendEvent(Events.EVENT_AUDIT_PASS);
-        stateMachine.sendEvent(Events.EVENT_SEND);
+        MachineMessage<Events> message1 = new MachineMessage<Events>(Events.EVENT_AUDIT_PASS, entity);
+        stateMachine.sendEvent(message1);
 
-        /*Entity entity = new Entity();
-        entity.setCurrentState(States.STATE_WAIT_AUDIT);
-        MachineMessage<Events> message = new MachineMessage<Events>(Events.EVENT_AUDIT_PASS, entity);
-        stateMachine.sendEvent(message);*/
+        MachineMessage<Events> message2 = new MachineMessage<Events>(Events.EVENT_SEND, entity);
+        stateMachine.sendEvent(message2);
+    }
+    
+    private void test2() throws Exception {
+        Entity entity = new Entity();
+
+        MachineMessage<Events> message1 = new MachineMessage<Events>(Events.EVENT_AUDIT_REJECT, entity);
+        stateMachine.sendEvent(message1);
+
+        MachineMessage<Events> message2 = new MachineMessage<Events>(Events.EVENT_DELETE, entity);
+        stateMachine.sendEvent(message2);
     }
 
     public static void main(String[] args) {

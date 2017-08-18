@@ -19,38 +19,48 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.nepxion.apollo.state.machine.enums.Actions;
+import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
 
 public class Entity implements Serializable {
     private static final long serialVersionUID = -6738573261177034688L;
 
-    private States currentState;
-    private States nextState;
+    private States sourceState;
+    private States targetState;
+    private Events event;
 
-    private List<Actions> nextActionList;
+    private List<Actions> targetActions;
 
-    public States getCurrentState() {
-        return currentState;
+    public States getSourceState() {
+        return sourceState;
     }
 
-    public void setCurrentState(States currentState) {
-        this.currentState = currentState;
+    public void setSourceState(States sourceState) {
+        this.sourceState = sourceState;
     }
 
-    public States getNextState() {
-        return nextState;
+    public States getTargetState() {
+        return targetState;
     }
 
-    public void setNextState(States nextState) {
-        this.nextState = nextState;
+    public void setTargetState(States targetState) {
+        this.targetState = targetState;
     }
 
-    public List<Actions> getNextActionList() {
-        return nextActionList;
+    public Events getEvent() {
+        return event;
     }
 
-    public void setNextActionList(List<Actions> nextActionList) {
-        this.nextActionList = nextActionList;
+    public void setEvent(Events event) {
+        this.event = event;
+    }
+
+    public List<Actions> getTargetActions() {
+        return targetActions;
+    }
+
+    public void setTargetActions(List<Actions> targetActions) {
+        this.targetActions = targetActions;
     }
 
     @Override
