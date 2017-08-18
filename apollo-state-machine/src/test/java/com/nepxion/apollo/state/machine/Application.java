@@ -10,7 +10,6 @@ package com.nepxion.apollo.state.machine;
  * @version 1.0
  */
 
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +23,7 @@ import com.nepxion.apollo.state.machine.enums.States;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
     @Autowired
-    private ObjectFactory<StateMachine<States, Events>> stateMachineObjectFactory;
+    private StateHandler stateHandler;
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,18 +35,20 @@ public class Application implements CommandLineRunner {
         Entity entity = new Entity();
         entity.setSourceState(States.STATE_WAIT_AUDIT);
 
-        StateMachine<States, Events> stateMachine = stateMachineObjectFactory.getObject();
-        stateMachine.sendEvent(new StateMessage<Events>(Events.EVENT_AUDIT_PASS, entity));
-        stateMachine.sendEvent(new StateMessage<Events>(Events.EVENT_SEND, entity));
+        // 处理同一个对象的状态，必须是同一个状态机
+        StateMachine<States, Events> stateMachine = stateHandler.getStateMachine();
+        stateHandler.execute(stateMachine, Events.EVENT_AUDIT_PASS, entity);
+        stateHandler.execute(stateMachine, Events.EVENT_SEND, entity);
     }
 
     private void test2() throws Exception {
         Entity entity = new Entity();
         entity.setSourceState(States.STATE_WAIT_AUDIT);
 
-        StateMachine<States, Events> stateMachine = stateMachineObjectFactory.getObject();
-        stateMachine.sendEvent(new StateMessage<Events>(Events.EVENT_AUDIT_REJECT, entity));
-        stateMachine.sendEvent(new StateMessage<Events>(Events.EVENT_DELETE, entity));
+        // 处理同一个对象的状态，必须是同一个状态机
+        StateMachine<States, Events> stateMachine = stateHandler.getStateMachine();
+        stateHandler.execute(stateMachine, Events.EVENT_AUDIT_REJECT, entity);
+        stateHandler.execute(stateMachine, Events.EVENT_DELETE, entity);
     }
 
     public static void main(String[] args) {
