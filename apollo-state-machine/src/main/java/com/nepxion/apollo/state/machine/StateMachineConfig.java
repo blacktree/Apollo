@@ -12,6 +12,8 @@ package com.nepxion.apollo.state.machine;
 
 import java.util.EnumSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -31,15 +33,17 @@ import com.nepxion.apollo.state.machine.enums.States;
 @EnableStateMachine
 @Scope("prototype")
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States, Events> {
+    private static final Logger LOG = LoggerFactory.getLogger(StateMachineConfig.class);
+
     @Override
     public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
         states
                 .withStates()
                 .initial(States.STATE_WAIT_AUDIT, initialAction())
-                .state(States.STATE_AUDIT_REJECT, action(), errorAction())
-                .state(States.STATE_WAIT_SEND, action(), errorAction())
-                .state(States.STATE_SEND_COMPLETE, action(), errorAction())
-                .state(States.STATE_DELETE_COMPLETE, action(), errorAction())
+                .state(States.STATE_AUDIT_REJECT, action(), exceptionAction())
+                .state(States.STATE_WAIT_SEND, action(), exceptionAction())
+                .state(States.STATE_SEND_COMPLETE, action(), exceptionAction())
+                .state(States.STATE_DELETE_COMPLETE, action(), exceptionAction())
                 .states(EnumSet.allOf(States.class));
     }
 
@@ -106,13 +110,13 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
                 entity.setEvent(event);
                 entity.setTargetActions(StateFactory.getActions(targetState));
 
-                System.out.println("entity : " + entity);
+                triggerAction(entity);
             }
         };
     }
 
     @Bean
-    public Action<States, Events> errorAction() {
+    public Action<States, Events> exceptionAction() {
         return new Action<States, Events>() {
             @Override
             public void execute(StateContext<States, Events> context) {
@@ -121,10 +125,16 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
                     return;
                 }
 
-                String message = exception.getMessage();
-
-                System.out.println("Error : " + message);
+                triggerExceptionAction(exception);
             }
         };
+    }
+
+    private void triggerAction(Entity entity) {
+        LOG.info("Entity : {}", entity);
+    }
+
+    private void triggerExceptionAction(Exception exception) {
+        LOG.error("Exception", exception);
     }
 }
