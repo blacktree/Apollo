@@ -14,6 +14,7 @@ import java.util.EnumSet;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachine;
@@ -29,6 +30,7 @@ import com.nepxion.apollo.state.machine.message.MachineMessage;
 
 @Configuration
 @EnableStateMachine
+@Scope("prototype")
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States, Events> {
     @Override
     public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {

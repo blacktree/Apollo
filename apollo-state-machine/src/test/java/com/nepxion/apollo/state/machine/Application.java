@@ -10,6 +10,7 @@ package com.nepxion.apollo.state.machine;
  * @version 1.0
  */
 
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +25,7 @@ import com.nepxion.apollo.state.machine.message.MachineMessage;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
     @Autowired
-    private StateMachine<States, Events> stateMachine;
+    private ObjectFactory<StateMachine<States, Events>> stateMachineObjectFactory;
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,6 +37,7 @@ public class Application implements CommandLineRunner {
         Entity entity = new Entity();
         entity.setSourceState(States.STATE_WAIT_AUDIT);
 
+        StateMachine<States, Events> stateMachine = stateMachineObjectFactory.getObject();
         stateMachine.sendEvent(new MachineMessage<Events>(Events.EVENT_AUDIT_PASS, entity));
         stateMachine.sendEvent(new MachineMessage<Events>(Events.EVENT_SEND, entity));
     }
@@ -44,6 +46,7 @@ public class Application implements CommandLineRunner {
         Entity entity = new Entity();
         entity.setSourceState(States.STATE_WAIT_AUDIT);
 
+        StateMachine<States, Events> stateMachine = stateMachineObjectFactory.getObject();
         stateMachine.sendEvent(new MachineMessage<Events>(Events.EVENT_AUDIT_REJECT, entity));
         stateMachine.sendEvent(new MachineMessage<Events>(Events.EVENT_DELETE, entity));
     }
