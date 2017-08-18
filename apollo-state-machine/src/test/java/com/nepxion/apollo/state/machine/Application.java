@@ -9,6 +9,7 @@ package com.nepxion.apollo.state.machine;
  * @email 1394997@qq.com
  * @version 1.0
  */
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,8 +27,14 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         stateMachine.start();
+
         stateMachine.sendEvent(Events.EVENT_AUDIT_PASS);
         stateMachine.sendEvent(Events.EVENT_SEND);
+
+        /*Entity entity = new Entity();
+        entity.setCurrentState(States.STATE_WAIT_AUDIT);
+        MachineMessage<Events> message = new MachineMessage<Events>(Events.EVENT_AUDIT_PASS, entity);
+        stateMachine.sendEvent(message);*/
     }
 
     public static void main(String[] args) {
