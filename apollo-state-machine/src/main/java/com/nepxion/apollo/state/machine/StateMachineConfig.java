@@ -35,10 +35,10 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
         states
                 .withStates()
                 .initial(States.STATE_WAIT_AUDIT)
-                .state(States.STATE_AUDIT_REJECT, action())
-                .state(States.STATE_WAIT_SEND, action())
-                .state(States.STATE_SEND_COMPLETE, action())
-                .state(States.STATE_DELETE_COMPLETE, action())
+                .state(States.STATE_AUDIT_REJECT, action(), errorAction())
+                .state(States.STATE_WAIT_SEND, action(), errorAction())
+                .state(States.STATE_SEND_COMPLETE, action(), errorAction())
+                .state(States.STATE_DELETE_COMPLETE, action(), errorAction())
                 .states(EnumSet.allOf(States.class));
     }
 
@@ -96,6 +96,23 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
                 entity.setTargetActions(StateFactory.getActions(targetState));
 
                 System.out.println("entity : " + entity);
+            }
+        };
+    }
+
+    @Bean
+    public Action<States, Events> errorAction() {
+        return new Action<States, Events>() {
+            @Override
+            public void execute(StateContext<States, Events> context) {
+                Exception exception = context.getException();
+                if (exception == null) {
+                    return;
+                }
+                
+                String message = exception.getMessage();
+
+                System.out.println("Error : " + message);
             }
         };
     }
