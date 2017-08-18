@@ -20,7 +20,7 @@ import org.springframework.statemachine.StateMachine;
 import com.nepxion.apollo.state.machine.entity.Entity;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
-import com.nepxion.apollo.state.machine.message.MachineMessage;
+import com.nepxion.apollo.state.machine.message.StateMessage;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -38,8 +38,8 @@ public class Application implements CommandLineRunner {
         entity.setSourceState(States.STATE_WAIT_AUDIT);
 
         StateMachine<States, Events> stateMachine = stateMachineObjectFactory.getObject();
-        stateMachine.sendEvent(new MachineMessage<Events>(Events.EVENT_AUDIT_PASS, entity));
-        stateMachine.sendEvent(new MachineMessage<Events>(Events.EVENT_SEND, entity));
+        stateMachine.sendEvent(new StateMessage<Events>(Events.EVENT_AUDIT_PASS, entity));
+        stateMachine.sendEvent(new StateMessage<Events>(Events.EVENT_SEND, entity));
     }
 
     private void test2() throws Exception {
@@ -47,8 +47,8 @@ public class Application implements CommandLineRunner {
         entity.setSourceState(States.STATE_WAIT_AUDIT);
 
         StateMachine<States, Events> stateMachine = stateMachineObjectFactory.getObject();
-        stateMachine.sendEvent(new MachineMessage<Events>(Events.EVENT_AUDIT_REJECT, entity));
-        stateMachine.sendEvent(new MachineMessage<Events>(Events.EVENT_DELETE, entity));
+        stateMachine.sendEvent(new StateMessage<Events>(Events.EVENT_AUDIT_REJECT, entity));
+        stateMachine.sendEvent(new StateMessage<Events>(Events.EVENT_DELETE, entity));
     }
 
     public static void main(String[] args) {

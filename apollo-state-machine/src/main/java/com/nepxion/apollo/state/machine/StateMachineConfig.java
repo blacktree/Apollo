@@ -26,7 +26,7 @@ import org.springframework.statemachine.config.builders.StateMachineTransitionCo
 import com.nepxion.apollo.state.machine.entity.Entity;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
-import com.nepxion.apollo.state.machine.message.MachineMessage;
+import com.nepxion.apollo.state.machine.message.StateMessage;
 
 @Configuration
 @EnableStateMachine
@@ -95,7 +95,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
         return new Action<States, Events>() {
             @Override
             public void execute(StateContext<States, Events> context) {
-                MachineMessage<Events> message = (MachineMessage<Events>) context.getMessage();
+                StateMessage<Events> message = (StateMessage<Events>) context.getMessage();
                 Events event = message.getPayload();
                 Entity entity = message.getEntity();
 

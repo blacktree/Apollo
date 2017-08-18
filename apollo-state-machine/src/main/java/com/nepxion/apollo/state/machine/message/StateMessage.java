@@ -18,12 +18,12 @@ import org.springframework.messaging.support.GenericMessage;
 
 import com.nepxion.apollo.state.machine.entity.Entity;
 
-public class MachineMessage<T> extends GenericMessage<T> {
+public class StateMessage<T> extends GenericMessage<T> {
     private static final long serialVersionUID = 3822349578970192942L;
 
     private Entity entity;
 
-    public MachineMessage(T payload, Entity entity) {
+    public StateMessage(T payload, Entity entity) {
         super(payload);
 
         this.entity = entity;
