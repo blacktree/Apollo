@@ -1,4 +1,4 @@
-package com.nepxion.apollo.state.machine.message;
+package com.nepxion.apollo.state.machine;
 
 /**
  * <p>Title: Nepxion Apollo</p>

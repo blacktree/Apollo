@@ -26,7 +26,6 @@ import org.springframework.statemachine.config.builders.StateMachineTransitionCo
 import com.nepxion.apollo.state.machine.entity.Entity;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
-import com.nepxion.apollo.state.machine.message.StateMessage;
 
 @Configuration
 @EnableStateMachine

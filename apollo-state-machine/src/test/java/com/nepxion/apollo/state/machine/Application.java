@@ -20,7 +20,6 @@ import org.springframework.statemachine.StateMachine;
 import com.nepxion.apollo.state.machine.entity.Entity;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
-import com.nepxion.apollo.state.machine.message.StateMessage;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
