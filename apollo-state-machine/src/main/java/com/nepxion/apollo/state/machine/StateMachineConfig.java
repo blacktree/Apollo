@@ -34,7 +34,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
     public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
         states
                 .withStates()
-                .initial(States.STATE_WAIT_AUDIT)
+                .initial(States.STATE_WAIT_AUDIT, initialAction())
                 .state(States.STATE_AUDIT_REJECT, action(), errorAction())
                 .state(States.STATE_WAIT_SEND, action(), errorAction())
                 .state(States.STATE_SEND_COMPLETE, action(), errorAction())
@@ -79,6 +79,16 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
     }
 
     @Bean
+    public Action<States, Events> initialAction() {
+        return new Action<States, Events>() {
+            @Override
+            public void execute(StateContext<States, Events> context) {
+
+            }
+        };
+    }
+
+    @Bean
     public Action<States, Events> action() {
         return new Action<States, Events>() {
             @Override
@@ -109,7 +119,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
                 if (exception == null) {
                     return;
                 }
-                
+
                 String message = exception.getMessage();
 
                 System.out.println("Error : " + message);
