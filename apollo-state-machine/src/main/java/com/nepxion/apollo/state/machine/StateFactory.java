@@ -44,7 +44,7 @@ public class StateFactory {
             return States.STATE_DELETE_COMPLETE;
         }
 
-        throw new IllegalArgumentException("Invalid state=[" + state + "] with event=[" + event + "]");
+        throw new StateException("Invalid state=[" + state + "] with event=[" + event + "]");
     }
 
     // 根据当前状态获取下一步动作列表
@@ -62,6 +62,6 @@ public class StateFactory {
                 return Arrays.asList();
         }
 
-        throw new IllegalArgumentException("Invalid state=[" + state + "]");
+        throw new StateException("Invalid state=[" + state + "]");
     }
 }

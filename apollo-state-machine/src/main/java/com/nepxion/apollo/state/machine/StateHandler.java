@@ -35,6 +35,10 @@ public class StateHandler {
     }
 
     public void execute(StateMachine<States, Events> stateMachine, Events event, Entity entity) {
-        stateMachine.sendEvent(new StateMessage<Events>(event, entity));
+        boolean result = stateMachine.sendEvent(new StateMessage<Events>(event, entity));
+
+        if (!result) {
+            throw new StateException("Invalid event=[" + event + "] to execute with entity=[" + entity + "]");
+        }
     }
 }
