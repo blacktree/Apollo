@@ -19,7 +19,7 @@ import com.nepxion.apollo.state.machine.enums.States;
 
 public class StateFactory {
     // 根据当前状态和事件，驱动出下一个状态
-    public static States getState(States state, Events event) {
+    public static States getNextState(States state, Events event) {
         if (state == States.STATE_WAIT_AUDIT && event == Events.EVENT_AUDIT_PASS) {
             return States.STATE_WAIT_SEND;
         }
@@ -48,7 +48,7 @@ public class StateFactory {
     }
 
     // 根据当前状态获取下一步动作列表
-    public static List<Actions> getActions(States state) {
+    public static List<Actions> getNextActions(States state) {
         switch (state) {
             case STATE_WAIT_AUDIT:
                 return Arrays.asList(Actions.ACTION_TO_AUDIT, Actions.ACTION_TO_DELETE);
