@@ -85,16 +85,6 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
     }
 
     @Bean
-    public Action<States, Events> initialAction() {
-        return new Action<States, Events>() {
-            @Override
-            public void execute(StateContext<States, Events> context) {
-
-            }
-        };
-    }
-
-    @Bean
     public Action<States, Events> action() {
         return new Action<States, Events>() {
             @Override

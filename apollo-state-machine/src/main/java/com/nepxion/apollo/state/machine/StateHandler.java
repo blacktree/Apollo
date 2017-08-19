@@ -29,13 +29,13 @@ public class StateHandler {
         return stateMachineObjectFactory.getObject();
     }
 
-    public void execute(Events event, StateEntity entity) {
+    public void sendEvent(Events event, StateEntity entity) {
         StateMachine<States, Events> stateMachine = getStateMachine();
 
-        execute(stateMachine, event, entity);
+        sendEvent(stateMachine, event, entity);
     }
 
-    public void execute(StateMachine<States, Events> stateMachine, Events event, StateEntity entity) {
+    public void sendEvent(StateMachine<States, Events> stateMachine, Events event, StateEntity entity) {
         boolean result = stateMachine.sendEvent(new StateMessage<Events>(event, entity));
 
         if (!result) {

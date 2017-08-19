@@ -37,8 +37,8 @@ public class MyApplication implements CommandLineRunner {
 
         // 处理同一个对象的状态，必须是同一个状态机
         StateMachine<States, Events> stateMachine = stateHandler.getStateMachine();
-        stateHandler.execute(stateMachine, Events.EVENT_AUDIT_PASS, entity);
-        stateHandler.execute(stateMachine, Events.EVENT_SEND, entity);
+        stateHandler.sendEvent(stateMachine, Events.EVENT_AUDIT_PASS, entity);
+        stateHandler.sendEvent(stateMachine, Events.EVENT_SEND, entity);
     }
 
     private void test2() throws Exception {
@@ -48,8 +48,8 @@ public class MyApplication implements CommandLineRunner {
 
         // 处理同一个对象的状态，必须是同一个状态机
         StateMachine<States, Events> stateMachine = stateHandler.getStateMachine();
-        stateHandler.execute(stateMachine, Events.EVENT_AUDIT_REJECT, entity);
-        stateHandler.execute(stateMachine, Events.EVENT_DELETE, entity);
+        stateHandler.sendEvent(stateMachine, Events.EVENT_AUDIT_REJECT, entity);
+        stateHandler.sendEvent(stateMachine, Events.EVENT_DELETE, entity);
     }
 
     public static void main(String[] args) {
