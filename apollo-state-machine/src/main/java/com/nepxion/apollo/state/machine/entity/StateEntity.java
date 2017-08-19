@@ -22,7 +22,7 @@ import com.nepxion.apollo.state.machine.enums.Actions;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
 
-public class Entity implements Serializable {
+public class StateEntity implements Serializable {
     private static final long serialVersionUID = -6738573261177034688L;
 
     // 上一个状态

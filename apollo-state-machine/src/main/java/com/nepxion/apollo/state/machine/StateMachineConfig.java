@@ -25,7 +25,8 @@ import org.springframework.statemachine.config.builders.StateMachineConfiguratio
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
 
-import com.nepxion.apollo.state.machine.entity.Entity;
+import com.nepxion.apollo.state.machine.entity.StateEntity;
+import com.nepxion.apollo.state.machine.entity.StateMessage;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
 
@@ -100,7 +101,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
             public void execute(StateContext<States, Events> context) {
                 StateMessage<Events> message = (StateMessage<Events>) context.getMessage();
                 Events event = message.getPayload();
-                Entity entity = message.getEntity();
+                StateEntity entity = message.getEntity();
 
                 States sourceState = context.getSource().getId();
                 States targetState = context.getTarget().getId();
@@ -130,7 +131,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
         };
     }
 
-    private void triggerAction(Entity entity) {
+    private void triggerAction(StateEntity entity) {
         LOG.info("Entity : {}", entity);
     }
 

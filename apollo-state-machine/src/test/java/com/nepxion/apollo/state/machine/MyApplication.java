@@ -16,12 +16,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.statemachine.StateMachine;
 
-import com.nepxion.apollo.state.machine.entity.Entity;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
 
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class MyApplication implements CommandLineRunner {
     @Autowired
     private StateHandler stateHandler;
 
@@ -32,7 +31,8 @@ public class Application implements CommandLineRunner {
     }
 
     private void test1() throws Exception {
-        Entity entity = new Entity();
+        MyStateEntity entity = new MyStateEntity();
+        entity.setName("审核通过发送");
         entity.setSourceState(States.STATE_WAIT_AUDIT);
 
         // 处理同一个对象的状态，必须是同一个状态机
@@ -42,7 +42,8 @@ public class Application implements CommandLineRunner {
     }
 
     private void test2() throws Exception {
-        Entity entity = new Entity();
+        MyStateEntity entity = new MyStateEntity();
+        entity.setName("审核拒绝删除");
         entity.setSourceState(States.STATE_WAIT_AUDIT);
 
         // 处理同一个对象的状态，必须是同一个状态机
@@ -52,6 +53,6 @@ public class Application implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(MyApplication.class, args);
     }
 }

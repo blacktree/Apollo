@@ -1,4 +1,4 @@
-package com.nepxion.apollo.state.machine;
+package com.nepxion.apollo.state.machine.entity;
 
 /**
  * <p>Title: Nepxion Apollo</p>
@@ -16,20 +16,18 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.messaging.support.GenericMessage;
 
-import com.nepxion.apollo.state.machine.entity.Entity;
-
 public class StateMessage<T> extends GenericMessage<T> {
     private static final long serialVersionUID = 3822349578970192942L;
 
-    private Entity entity;
+    private StateEntity entity;
 
-    public StateMessage(T payload, Entity entity) {
+    public StateMessage(T payload, StateEntity entity) {
         super(payload);
 
         this.entity = entity;
     }
 
-    public Entity getEntity() {
+    public StateEntity getEntity() {
         return entity;
     }
 

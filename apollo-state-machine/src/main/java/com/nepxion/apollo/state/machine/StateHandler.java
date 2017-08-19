@@ -15,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.stereotype.Component;
 
-import com.nepxion.apollo.state.machine.entity.Entity;
+import com.nepxion.apollo.state.machine.entity.StateEntity;
+import com.nepxion.apollo.state.machine.entity.StateMessage;
 import com.nepxion.apollo.state.machine.enums.Events;
 import com.nepxion.apollo.state.machine.enums.States;
 
@@ -28,13 +29,13 @@ public class StateHandler {
         return stateMachineObjectFactory.getObject();
     }
 
-    public void execute(Events event, Entity entity) {
+    public void execute(Events event, StateEntity entity) {
         StateMachine<States, Events> stateMachine = getStateMachine();
 
         execute(stateMachine, event, entity);
     }
 
-    public void execute(StateMachine<States, Events> stateMachine, Events event, Entity entity) {
+    public void execute(StateMachine<States, Events> stateMachine, Events event, StateEntity entity) {
         boolean result = stateMachine.sendEvent(new StateMessage<Events>(event, entity));
 
         if (!result) {
