@@ -99,7 +99,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
                 entity.setSourceState(sourceState);
                 entity.setTargetState(targetState);
                 entity.setEvent(event);
-                entity.setTargetActions(StateFactory.getActions(targetState));
+                entity.setTargetActions(StateFactory.getNextActions(targetState));
 
                 triggerAction(entity);
             }
