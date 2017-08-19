@@ -39,7 +39,7 @@ public class StateHandler {
         boolean result = stateMachine.sendEvent(new StateMessage<Events>(event, entity));
 
         if (!result) {
-            throw new StateException("Invalid event=[" + event + "] to execute with entity=[" + entity + "]");
+            throw new StateException("Not match with correct state flow, source state=[" + entity.getSourceState() + "], event=[" + event + "] to send failed");
         }
     }
 }
