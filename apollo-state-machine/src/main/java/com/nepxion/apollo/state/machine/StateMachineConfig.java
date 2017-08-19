@@ -40,11 +40,11 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
     public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
         states
                 .withStates()
-                .initial(States.STATE_WAIT_AUDIT, initialAction())
-                .state(States.STATE_AUDIT_REJECT, action(), exceptionAction())
-                .state(States.STATE_WAIT_SEND, action(), exceptionAction())
-                .state(States.STATE_SEND_COMPLETE, action(), exceptionAction())
-                .state(States.STATE_DELETE_COMPLETE, action(), exceptionAction())
+                .initial(States.STATE_WAIT_AUDIT)
+                .state(States.STATE_AUDIT_REJECT, action())
+                .state(States.STATE_WAIT_SEND, action())
+                .state(States.STATE_SEND_COMPLETE, action())
+                .state(States.STATE_DELETE_COMPLETE, action())
                 .states(EnumSet.allOf(States.class));
     }
 
@@ -116,26 +116,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
         };
     }
 
-    @Bean
-    public Action<States, Events> exceptionAction() {
-        return new Action<States, Events>() {
-            @Override
-            public void execute(StateContext<States, Events> context) {
-                Exception exception = context.getException();
-                if (exception == null) {
-                    return;
-                }
-
-                triggerExceptionAction(exception);
-            }
-        };
-    }
-
     private void triggerAction(StateEntity entity) {
         LOG.info("Entity : {}", entity);
-    }
-
-    private void triggerExceptionAction(Exception exception) {
-        LOG.error("Exception", exception);
     }
 }
