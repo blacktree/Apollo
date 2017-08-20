@@ -25,6 +25,8 @@ import com.nepxion.apollo.state.machine.enums.States;
 public class StateEntity implements Serializable {
     private static final long serialVersionUID = -6738573261177034688L;
 
+    private String name;
+
     // 上一个状态
     private States sourceState;
 
@@ -36,6 +38,14 @@ public class StateEntity implements Serializable {
 
     // 下一个状态对应的操作列表
     private List<Actions> targetActions;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public States getSourceState() {
         return sourceState;
