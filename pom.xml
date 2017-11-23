@@ -24,11 +24,11 @@
         <module>apollo-oauth-server</module>
         <module>apollo-zookeeper-reference</module>
         <module>apollo-zookeeper-service</module>
-	<module>apollo-state-machine</module>
+        <module>apollo-state-machine</module>
     </modules>
 
     <properties>
-        <spring.cloud.dependencies.version>Camden.SR3</spring.cloud.dependencies.version>
+        <spring.cloud.version>Camden.SR3</spring.cloud.version>
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -178,7 +178,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud.dependencies.version}</version>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
