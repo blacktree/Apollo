@@ -12,7 +12,6 @@ package com.nepxion.apollo.gateway;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +44,7 @@ public class ZuulAccessFilter extends ZuulFilter {
         LOG.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
         Object accessToken = request.getParameter("accessToken");
-        if (accessToken == null || !StringUtils.equals(accessToken.toString(), "token")) {
+        if (accessToken == null || !accessToken.toString().equals("token")) {
             LOG.warn("Access token is empty or invalid");
 
             context.setSendZuulResponse(false);
