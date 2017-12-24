@@ -3,7 +3,8 @@
 
 Nepxion Apollo是一款快速搭建Spring Cloud环境的示例，集成了Spring Cloud的主要组件使用方式
 
-## 示例(针对Eureka为例，Zookeeper方式同理)
+## 示例
+针对Eureka为例，Zookeeper方式同理
 
     1. 运行Spring Cloud的Eureka Server集群
        运行apollo-eureka-cluster下EurekaCluster1，EurekaCluster2，EurekaCluster3
