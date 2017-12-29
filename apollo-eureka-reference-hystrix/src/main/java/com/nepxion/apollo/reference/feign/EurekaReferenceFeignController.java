@@ -26,7 +26,7 @@ public class EurekaReferenceFeignController {
         return feignClient.getUser("Zhangsan");
     }
     
-    // Url=http://localhost:3333/add2
+    // http://localhost:3333/add2
     @RequestMapping(value = "/add2", method = RequestMethod.GET)
     public Integer add() {
         return feignClient.add(10, 20);
