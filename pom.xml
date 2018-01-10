@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
     <version>1.0.0</version>
-    <description>Nepxion Apollo is a quick start with primary components integration for Spring Cloud, just let you learn how to use it easily and flexibly</description>
+    <description>Nepxion Apollo is a quick start with primary components integration for Spring Cloud</description>
     <url>https://github.com/Nepxion/</url>
     <parent>
         <groupId>org.springframework.boot</groupId>
