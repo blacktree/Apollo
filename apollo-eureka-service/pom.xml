@@ -5,6 +5,8 @@
     <name>Apollo Eureka Service</name>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
+    <description>Nepxion Apollo is a quick start with primary components integration for Spring Cloud</description>
+    <url>http://www.nepxion.com</url>
 
     <parent>
         <groupId>com.nepxion</groupId>
