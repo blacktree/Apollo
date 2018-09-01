@@ -1,6 +1,8 @@
 # Nepxion Apollo
 [![Total lines](https://tokei.rs/b1/github/Nepxion/Apollo?category=lines)](https://github.com/Nepxion/Apollo)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license)](https://github.com/Nepxion/Apollo/blob/master/LICENSE)
+[![Stars](https://img.shields.io/github/stars/Nepxion/Apollo.svg)](https://github.com/Nepxion/Apollo/stargazers)
+[![Forks](https://img.shields.io/github/forks/Nepxion/Apollo.svg)](https://github.com/Nepxion/Apollo/network/members)
 
 Nepxion Apollo是一款快速搭建Spring Cloud环境的示例，集成了Spring Cloud的主要组件使用方式
 
