@@ -6,7 +6,7 @@ Nepxion Apollo是一款快速搭建Spring Cloud环境的示例，集成了Spring
 
 ## 请联系我
 ![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信-1.jpg)
-
+ 
 ## 示例
 针对Eureka为例，Zookeeper方式同理
 - 运行Spring Cloud的Eureka Server集群
