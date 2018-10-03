@@ -6,6 +6,7 @@ Nepxion Apollo是一款快速搭建Spring Cloud环境的示例，提供了Spring
 
 ## 请联系我
 微信和公众号
+
 ![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信-1.jpg)
 ![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/公众号-1.jpg)
 
